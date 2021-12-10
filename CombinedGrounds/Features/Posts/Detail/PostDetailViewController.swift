@@ -8,10 +8,12 @@
 import UIKit
 
 class PostDetailViewController: UIViewController {
-    var post: Post
+    var post: Post?
+    var viewModel: PostViewModel
 
-    init(post: Post) {
+    init(post: Post? = nil, viewModel: PostViewModel) {
         self.post = post
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         setupViews()
     }
