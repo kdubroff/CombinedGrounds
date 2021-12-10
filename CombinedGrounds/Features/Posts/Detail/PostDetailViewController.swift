@@ -38,6 +38,52 @@ class PostDetailViewController: UIViewController {
         return textView
     }()
 
+    private func setupEditButton() {
+        let editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleEditing))
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handlePost))
+        navigationItem.rightBarButtonItem = isEditing ? doneButton : editButton
+    }
+
+    override var isEditing: Bool {
+        didSet {
+            setupEditButton()
+            titleTextView.isEditable = isEditing
+            bodyTextView.isEditable = isEditing
+        }
+    }
+
+    private func newPost() {
+        guard let title = titleTextView.text,
+              let body = bodyTextView.text
+        else { return }
+        // TODO: UserId
+        let post = viewModel.addPost(title: title, body: body, userId: 0)
+        self.post = post
+    }
+
+    @objc private func handlePost() {
+        defer { toggleEditing() }
+
+        guard var post = post else {
+            newPost()
+            return
+        }
+
+        if isEditing {
+            if let title = titleTextView.text,
+               let body = bodyTextView.text,
+               title != post.title || body != post.body {
+                post.title = title
+                post.body = body
+                viewModel.editPost(post)
+            }
+        }
+    }
+
+    @objc private func toggleEditing() {
+        isEditing.toggle()
+    }
+
     private func setupViews() {
         view.backgroundColor = .systemBackground
         titleTextView.text = post?.title
