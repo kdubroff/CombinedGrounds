@@ -12,6 +12,11 @@ class PostViewModel {
     @Published var posts: [Post] = []
     private var cancellable: AnyCancellable?
 
+    private var nextId: Int {
+        guard let max = posts.map({ $0.id }).max() else { return 0 }
+        return max + 1
+    }
+
     init() {
         getPosts()
     }
@@ -28,12 +33,7 @@ class PostViewModel {
 
         self.cancellable = dataResult
     }
-
-    private var nextId: Int {
-        guard let max = posts.map({ $0.id }).max() else { return 0 }
-        return max + 1
-    }
-
+    
     func addPost(title: String, body: String, userId: Int) {
         let post = Post(userId: userId, id: nextId, title: formatPostTitle(title), body: body)
         posts.append(post)
