@@ -13,7 +13,7 @@ class PostListViewController: UITableViewController {
     var viewModel: PostViewModel = PostViewModel()
     private var cancelSet: Set<AnyCancellable> = []
 
-    lazy var posts: [Post] = [] {
+    var posts: [Post] = [] {
         didSet {
             tableView.reloadData()
             spinner.stopAnimating()
