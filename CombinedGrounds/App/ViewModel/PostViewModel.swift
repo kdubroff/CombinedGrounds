@@ -10,6 +10,21 @@ import Combine
 
 class PostViewModel {
     @Published var posts: [Post] = []
+
+    private var postBacking: [Post] = [] {
+        didSet {
+            var formattedPosts: [Post] = []
+
+            for post in postBacking {
+                var post = post
+                post.title = formatPostTitle(post.title)
+                formattedPosts.append(post)
+            }
+
+            posts = formattedPosts
+        }
+    }
+
     private var cancellable: AnyCancellable?
 
     private var nextId: Int {
@@ -29,20 +44,20 @@ class PostViewModel {
             .receive(on: RunLoop.main)
             .eraseToAnyPublisher()
             .catch { _ in Just([Post]()) }
-            .assign(to: \.posts, on: self)
+            .assign(to: \.postBacking, on: self)
 
         self.cancellable = dataResult
     }
     
     func addPost(title: String, body: String, userId: Int) {
-        let post = Post(userId: userId, id: nextId, title: formatPostTitle(title), body: body)
-        posts.append(post)
+        let post = Post(userId: userId, id: nextId, title: title, body: body)
+        postBacking.append(post)
     }
     /// First edit post attributes, then call this method to replace with the edited post
     /// - NOTE: Performance can be improved by converting `postCollection` to a Dictionary
     func editPost(_ post: Post) {
-        posts.removeAll(where: { $0.id == post.id })
-        posts.append(post)
+        postBacking.removeAll(where: { $0.id == post.id })
+        postBacking.append(post)
     }
 
     private func formatPostTitle(_ title: String) -> String {
