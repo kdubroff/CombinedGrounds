@@ -75,6 +75,6 @@ extension PostListViewController {
         let detailViewController = PostDetailViewController(post: post)
         detailViewController.modalPresentationStyle = .fullScreen
         detailViewController.modalTransitionStyle = .flipHorizontal
-        present(detailViewController, animated: true)
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
