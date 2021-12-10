@@ -45,9 +45,10 @@ class PostViewModel {
         self.cancellable = dataResult
     }
     
-    func addPost(title: String, body: String, userId: Int) {
+    @discardableResult func addPost(title: String, body: String, userId: Int) -> Post {
         let post = Post(userId: userId, id: nextId, title: title, body: body)
         postBacking.append(post)
+        return post
     }
     /// First edit post attributes, then call this method to replace with the edited post
     /// - NOTE: Performance can be improved by converting `postCollection` to a Dictionary
