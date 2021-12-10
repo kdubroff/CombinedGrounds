@@ -15,8 +15,7 @@ class PostViewModel {
         didSet {
             var formattedPosts: [Post] = []
 
-            for post in postBacking {
-                var post = post
+            for var post in postBacking {
                 post.title = formatPostTitle(post.title)
                 formattedPosts.append(post)
             }
