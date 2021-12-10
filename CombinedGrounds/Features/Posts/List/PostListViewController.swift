@@ -73,6 +73,8 @@ extension PostListViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let post = posts[indexPath.row]
         let detailViewController = PostDetailViewController(post: post)
+        detailViewController.modalPresentationStyle = .fullScreen
+        detailViewController.modalTransitionStyle = .flipHorizontal
         present(detailViewController, animated: true)
     }
 }
