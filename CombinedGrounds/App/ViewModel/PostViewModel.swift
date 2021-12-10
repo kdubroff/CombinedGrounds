@@ -45,7 +45,7 @@ class PostViewModel {
         posts.append(post)
     }
 
-    func formatPostTitle(_ title: String) -> String {
+    private func formatPostTitle(_ title: String) -> String {
         title.firstCapitalized
     }
 
