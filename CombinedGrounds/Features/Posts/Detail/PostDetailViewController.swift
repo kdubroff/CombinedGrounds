@@ -20,39 +20,41 @@ class PostDetailViewController: UIViewController {
         fatalError("programmatic")
     }
 
-    lazy var stackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [titleLabel, bodyTextView])
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.spacing = 20
-        return stack
-    }()
-
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title3)
-        label.numberOfLines = 0
-        return label
+    lazy var titleTextView: UITextView = {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.font = .preferredFont(forTextStyle: .title3)
+        textView.isEditable = isEditing
+        return textView
     }()
 
     lazy var bodyTextView: UITextView = {
         let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = .preferredFont(forTextStyle: .body)
-        textView.isEditable = false
+        textView.isEditable = isEditing
         return textView
     }()
 
     private func setupViews() {
         view.backgroundColor = .systemBackground
-        titleLabel.text = post.title
-        bodyTextView.text = post.body
+        titleTextView.text = post?.title
+        bodyTextView.text = post?.body
 
-        view.addSubview(stackView)
+        view.addSubview(titleTextView)
+        view.addSubview(bodyTextView)
+        setupEditButton()
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20)
+            titleTextView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            titleTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            titleTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            titleTextView.heightAnchor.constraint(equalToConstant: 100),
+
+            bodyTextView.topAnchor.constraint(equalTo: titleTextView.bottomAnchor, constant: 20),
+            bodyTextView.trailingAnchor.constraint(equalTo: titleTextView.trailingAnchor),
+            bodyTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            bodyTextView.leadingAnchor.constraint(equalTo: titleTextView.leadingAnchor)
         ])
+
     }
 }
