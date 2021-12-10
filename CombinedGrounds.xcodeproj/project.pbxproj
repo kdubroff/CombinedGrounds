@@ -71,6 +71,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		DEBC729C2763D35200D80F12 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				DEE541DB27626BF300F358F8 /* PostListViewController.swift */,
+				DEBC72942763AE4000D80F12 /* PostListCell.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
 		DEE541CB27626BF300F358F8 = {
 			isa = PBXGroup;
 			children = (
@@ -107,11 +116,8 @@
 		DEE541F327626DD700F358F8 /* Posts */ = {
 			isa = PBXGroup;
 			children = (
+				DEBC729C2763D35200D80F12 /* List */,
 				DEBC72962763B31100D80F12 /* Detail */,
-				DEE541DB27626BF300F358F8 /* PostListViewController.swift */,
-				DEE541E227626BF400F358F8 /* LaunchScreen.storyboard */,
-				DEE541DD27626BF300F358F8 /* Main.storyboard */,
-				DEBC72942763AE4000D80F12 /* PostListCell.swift */,
 			);
 			path = Posts;
 			sourceTree = "<group>";
@@ -131,6 +137,8 @@
 		DEE541F527626DFC00F358F8 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				DEE541DD27626BF300F358F8 /* Main.storyboard */,
+				DEE541E227626BF400F358F8 /* LaunchScreen.storyboard */,
 				DEBC72992763B73600D80F12 /* ViewModel */,
 				DEE541FC276274A900F358F8 /* Model */,
 				DEE541F627626E8F00F358F8 /* Networking */,
