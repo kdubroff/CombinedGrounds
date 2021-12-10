@@ -13,6 +13,7 @@ class PostViewModel {
 
     private var postBacking: [Post] = [] {
         didSet {
+            posts = []
             for var post in postBacking {
                 post.title = formatPostTitle(post.title)
                 posts.append(post)
