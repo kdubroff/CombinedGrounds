@@ -44,6 +44,16 @@ class PostListViewController: UITableViewController {
         view.addSubview(spinner)
     }
 
+    private func setAddButton() {
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPost))
+        navigationItem.rightBarButtonItem = addButton
+    }
+
+    @objc private func addPost() {
+        let detailViewController = PostDetailViewController(viewModel: viewModel)
+        navigationController?.pushViewController(detailViewController, animated: true)
+    }
+
     private func setupViews() {
         tableView.register(PostListCell.self, forCellReuseIdentifier: PostListCell.identifier)
         
@@ -51,7 +61,8 @@ class PostListViewController: UITableViewController {
 
         self.title = "Posts"
         setSpinner()
-
+        setAddButton()
+        
         NSLayoutConstraint.activate([
             spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor)
