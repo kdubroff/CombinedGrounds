@@ -15,6 +15,7 @@ class PostDetailViewController: UIViewController {
         self.post = post
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        self.isEditing = post == nil
         setupViews()
     }
 
